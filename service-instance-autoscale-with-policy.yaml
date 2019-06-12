@@ -120,7 +120,7 @@ resources:
     type: OS::Heat::AutoScalingGroup
     properties:
       cooldown: 60
-      desired_capacity: 1
+      desired_capacity: 2
       max_size: 4
       min_size: 1
       resource:
@@ -131,7 +131,7 @@ resources:
           virtual_network_1: { get_param: left_network }
           virtual_network_1_fqdn: { get_param: fq_name_virtual_network1 }
           virtual_network_2: { get_param: right_network }
-          virtual_network_2_fqdn: { get_param: fq_name_virtual_network1 }
+          virtual_network_2_fqdn: { get_param: fq_name_virtual_network2 }
           service_instance_name: { list_join: [':', { get_attr: [ template_ServiceInstance, fq_name ] } ] }
           service_interface_type_1: 'left'
           service_interface_type_2: 'right'
@@ -145,18 +145,6 @@ resources:
       cooldown: 60
       scaling_adjustment: 1
 
-  cpu_alarm_high:
-    type: OS::Ceilometer::Alarm
-    properties:
-      meter_name: cpu_util
-      statistic: avg
-      period: 30
-      evaluation_periods: 1
-      threshold: 50
-      alarm_actions:
-        - {get_attr: [scaleup_policy, alarm_url]}
-      comparison_operator: gt
-
   scaledown_policy:
     type: OS::Heat::ScalingPolicy
     properties:
@@ -165,14 +153,11 @@ resources:
       cooldown: 60
       scaling_adjustment: -1
 
-  cpu_alarm_low:
-    type: OS::Ceilometer::Alarm
-    properties:
-      meter_name: cpu_util
-      statistic: avg
-      period: 30
-      evaluation_periods: 1
-      threshold: 20
-      alarm_actions:
-        - {get_attr: [scaledown_policy, alarm_url]}
-      comparison_operator: lt
+outputs:
+
+  scaleup_policy_signal_url:
+    value: {get_attr: [scaleup_policy, signal_url]}
+
+  scaledown_policy_signal_url:
+    value: {get_attr: [scaledown_policy, signal_url]}
+
