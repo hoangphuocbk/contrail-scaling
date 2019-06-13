@@ -33,3 +33,4 @@ HEAT template for scaling Service Instance
   openstack image create --public --container-format bare --disk-format raw --file centos7.qcow2 centos7
   openstack flavor create --ram 1024 --disk 20 --vcpus 1 --public medium
 
+
