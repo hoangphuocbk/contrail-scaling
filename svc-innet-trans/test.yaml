@@ -1,0 +1,58 @@
+  template_Network_Policy:
+    type: OS::ContrailV2::NetworkPolicy
+    depends_on: [template_ServiceInstance_1, template_ServiceInstance_2]
+    properties:
+      name: { get_param: policy_name }
+      network_policy_entries:
+        {
+          network_policy_entries_policy_rule:
+            [
+              {
+                network_policy_entries_policy_rule_direction: { get_param: direction },
+                network_policy_entries_policy_rule_protocol: { get_param: protocol },
+                network_policy_entries_policy_rule_src_ports:
+                  [
+                    {
+                      network_policy_entries_policy_rule_src_ports_start_port: { get_param: src_port_start },
+                      network_policy_entries_policy_rule_src_ports_end_port: { get_param: src_port_end }
+                    }
+                  ],
+                network_policy_entries_policy_rule_dst_ports:
+                  [
+                    {
+                      network_policy_entries_policy_rule_dst_ports_start_port: { get_param: dst_port_start },
+                      network_policy_entries_policy_rule_dst_ports_end_port: { get_param: dst_port_end }
+                    }
+                  ],
+                network_policy_entries_policy_rule_dst_addresses:
+                  [
+                    {
+                      network_policy_entries_policy_rule_dst_addresses_virtual_network:
+                        {
+                          list_join: [':', { get_attr: [ template_VirtualNetwork_3, fq_name ] } ]
+                        }
+                    }
+                  ],
+                network_policy_entries_policy_rule_src_addresses:
+                  [
+                    {
+                      network_policy_entries_policy_rule_src_addresses_virtual_network:
+                        {
+                          list_join: [':', { get_attr: [ template_VirtualNetwork_2, fq_name ] } ]
+                        }
+                    }
+                  ],
+                network_policy_entries_policy_rule_action_list: {
+                  network_policy_entries_policy_rule_action_list_simple_action: { get_param: simple_action },
+                  network_policy_entries_policy_rule_action_list_apply_service:
+                    [
+                      {
+                        list_join: [':', { get_attr: [ template_ServiceInstance_1, fq_name ] } ]
+                      },
+                      {
+                        list_join: [':', { get_attr: [ template_ServiceInstance_2, fq_name ] } ]
+                      }
+                    ]
+                },
+             ]
+        }
