@@ -967,7 +967,7 @@ resources:
     type: OS::Heat::WaitCondition
     depends_on: si1_instance
     properties:
-      count: 2
+      count: 1
       handle: { get_resource: wait_handle1 }
       timeout: 300
 
@@ -978,7 +978,7 @@ resources:
     type: OS::Heat::WaitCondition
     depends_on: si2_instance
     properties:
-      count: 2
+      count: 1
       handle: { get_resource: wait_handle2 }
       timeout: 300
 
