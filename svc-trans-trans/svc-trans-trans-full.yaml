@@ -1,0 +1,1028 @@
+heat_template_version: 2015-04-30
+
+description: Template to create complete service chain with client - in network service - transparent service - server
+
+parameters:
+
+  st1_name:
+    type: string
+    label: Service template fq name
+    description: Service template for port tuple
+
+  st1_properties_version:
+    type: string
+    description: Indicates service version
+
+  st1_properties_service_mode:
+    type: string
+    description: service mode
+
+  st1_properties_service_type:
+    type: string
+    description: service type
+
+  st1_properties_image_name:
+    type: string
+    description: Name of the image
+
+  st1_properties_flavor:
+    type: string
+    description: Flavor
+
+  st1_properties_ordered_interfaces:
+    type: string
+    description: Indicates service interfaces are ordered
+
+  st1_properties_interface_type_service_interface_type_1:
+    type: string
+    description: service_interface_type for the ServiceTemplate
+
+  st1_properties_interface_type_shared_ip_1:
+    type: boolean
+    description: shared_ip for the ServiceTemplate
+
+  st1_properties_interface_type_static_route_enable_1:
+    type: boolean
+    description: static_route_enable for the ServiceTemplate
+
+  st1_properties_interface_type_service_interface_type_2:
+    type: string
+    description: service_interface_type for the ServiceTemplate
+
+  st1_properties_interface_type_shared_ip_2:
+    type: boolean
+    description: shared_ip for the ServiceTemplate
+
+  st1_properties_interface_type_static_route_enable_2:
+    type: boolean
+    description: static_route_enable for the ServiceTemplate
+
+  st1_properties_interface_type_service_interface_type_3:
+    type: string
+    description: service_interface_type for the ServiceTemplate
+
+  st1_properties_interface_type_shared_ip_3:
+    type: boolean
+    description: shared_ip for the ServiceTemplate
+
+  st1_properties_interface_type_static_route_enable_3:
+    type: boolean
+    description: static_route_enable for the ServiceTemplate
+
+  st1_properties_service_scaling:
+    type: boolean
+    description: Indicates whether service scaling is enabled
+
+  st1_properties_availability_zone_enable:
+    type: string
+    description: Indicates availability zone is enabled
+
+  st1_properties_service_virtualization_type:
+    type: string
+    description: Indicates virtualization type
+
+  st2_name:
+    type: string
+    label: Service template fq name
+    description: Service template for port tuple
+
+  st2_properties_version:
+    type: string
+    description: Indicates service version
+
+  st2_properties_service_mode:
+    type: string
+    description: service mode
+
+  st2_properties_service_type:
+    type: string
+    description: service type
+
+  st2_properties_image_name:
+    type: string
+    description: Name of the image
+
+  st2_properties_flavor:
+    type: string
+    description: Flavor
+
+  st2_properties_ordered_interfaces:
+    type: string
+    description: Indicates service interfaces are ordered
+
+  st2_properties_interface_type_service_interface_type_1:
+    type: string
+    description: service_interface_type for the ServiceTemplate
+
+  st2_properties_interface_type_shared_ip_1:
+    type: boolean
+    description: shared_ip for the ServiceTemplate
+
+  st2_properties_interface_type_static_route_enable_1:
+    type: boolean
+    description: static_route_enable for the ServiceTemplate
+
+  st2_properties_interface_type_service_interface_type_2:
+    type: string
+    description: service_interface_type for the ServiceTemplate
+
+  st2_properties_interface_type_shared_ip_2:
+    type: boolean
+    description: shared_ip for the ServiceTemplate
+
+  st2_properties_interface_type_static_route_enable_2:
+    type: boolean
+    description: static_route_enable for the ServiceTemplate
+
+  st2_properties_interface_type_service_interface_type_3:
+    type: string
+    description: service_interface_type for the ServiceTemplate
+
+  st2_properties_interface_type_shared_ip_3:
+    type: boolean
+    description: shared_ip for the ServiceTemplate
+
+  st2_properties_interface_type_static_route_enable_3:
+    type: boolean
+    description: static_route_enable for the ServiceTemplate
+
+  st2_properties_service_scaling:
+    type: boolean
+    description: Indicates whether service scaling is enabled
+
+  st2_properties_availability_zone_enable:
+    type: string
+    description: Indicates availability zone is enabled
+
+  st2_properties_service_virtualization_type:
+    type: string
+    description: Indicates virtualization type
+
+  si1_name:
+    type: string
+    label: Service instance 1 name
+    description: Service instance for port tuple
+
+  si1_port_tuple_name:
+    type: string
+    description: name of Port Tuple 1
+
+  si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_2:
+    type: string
+    description: ip_prefix for the ServiceInstance
+
+  si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_2:
+    type: number
+    description: ip_prefix_len for the ServiceInstance
+
+  si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_mac_2:
+    type: string
+    description: mac for the ServiceInstance
+
+  si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_3:
+    type: string
+    description: ip_prefix for the ServiceInstance
+
+  si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_3:
+    type: number
+    description: ip_prefix_len for the ServiceInstance
+
+  si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_address_mode_3:
+    type: string
+    description: address_mode for the ServiceInstance
+
+  si2_name:
+    type: string
+    label: Service instance 2
+    description: Service instance for port tuple
+
+  si2_port_tuple_name:
+    type: string
+    description: name of Port Tuple 2
+
+  si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_2:
+    type: string
+    description: ip_prefix for the ServiceInstance
+
+  si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_2:
+    type: number
+    description: ip_prefix_len for the ServiceInstance
+
+  si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_mac_2:
+    type: string
+    description: mac for the ServiceInstance
+
+  si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_3:
+    type: string
+    description: ip_prefix for the ServiceInstance
+
+  si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_3:
+    type: number
+    description: ip_prefix_len for the ServiceInstance
+
+  si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_address_mode_3:
+    type: string
+    description: address_mode for the ServiceInstance
+
+  service_interface_type_1:
+    type: string
+    description: Service interface type (management, left, right)
+    default: management
+
+  service_interface_type_2:
+    type: string
+    description: Service interface type (management, left, right)
+    default: left
+
+  service_interface_type_3:
+    type: string
+    description: Service interface type (management, left, right)
+    default: right
+
+  domain:
+    type: string
+    description: Name of the Domain
+
+  management_network:
+    type: string
+    description: Name of management network to be created
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_1:
+    type: string
+    description: subnet prefix for mgmt network
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_1:
+    type: string
+    description: subnet prefix len for mgmt network
+
+  network_ipam_refs_data_ipam_subnets_default_gateway_1:
+    type: string
+    description: default gateway for management network
+
+  left_network:
+    type: string
+    description: Name of left network to be created
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_2:
+    type: string
+    description: subnet prefix for left network
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_2:
+    type: string
+    description: subnet prefix len for left network
+
+  right_network:
+    type: string
+    description: Name of right network to be created
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_3:
+    type: string
+    description: subnet prefix for right network
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_3:
+    type: string
+    description: subnet prefix len for right network
+
+  transparent_management_network:
+    type: string
+    description: Name of management network to be created
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_4:
+    type: string
+    description: subnet prefix for mgmt network
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_4:
+    type: string
+    description: subnet prefix len for mgmt network
+
+  network_ipam_refs_data_ipam_subnets_default_gateway_4:
+    type: string
+    description: default gateway for management network
+
+  transparent_left_network:
+    type: string
+    description: Name of transparent left network to be created
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_5:
+    type: string
+    description: subnet prefix for transparent left network
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_5:
+    type: string
+    description: subnet prefix len for transparent left network
+
+  transparent_right_network:
+    type: string
+    description: Name of transparent right network to be created
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_6:
+    type: string
+    description: subnet prefix for transparent right network
+
+  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_6:
+    type: string
+    description: subnet prefix len for transparent right network
+
+
+  policy_name:
+    type: string
+    description: Name of the Policy
+
+  simple_action:
+    type: string
+    description: Pass or Deny
+
+  protocol:
+    type: string
+    description: Protocol
+
+  direction:
+    type: string
+    description: Direction of the Policy
+
+  src_port_end:
+    type: number
+    description: End of the Source Port Range
+
+  src_port_start:
+    type: number
+    description: Start of the Source Port Range
+
+  dst_port_end:
+    type: number
+    description: End of the Destination Port Range
+
+  dst_port_start:
+    type: number
+    description: Start of the Destination Port Range
+
+
+resources:
+
+  template_NetworkIpam_1:
+    type: OS::ContrailV2::NetworkIpam
+    properties:
+      name: { get_param: management_network }
+
+  template_NetworkIpam_2:
+    type: OS::ContrailV2::NetworkIpam
+    properties:
+      name: { get_param: left_network }
+
+  template_NetworkIpam_3:
+    type: OS::ContrailV2::NetworkIpam
+    properties:
+      name: { get_param: right_network }
+
+  template_NetworkIpam_4:
+    type: OS::ContrailV2::NetworkIpam
+    properties:
+      name: { get_param: transparent_management_network }
+
+  template_NetworkIpam_5:
+    type: OS::ContrailV2::NetworkIpam
+    properties:
+      name: { get_param: transparent_left_network }
+
+  template_NetworkIpam_6:
+    type: OS::ContrailV2::NetworkIpam
+    properties:
+      name: { get_param: transparent_right_network }
+
+  template_VirtualNetwork_1:
+    type: OS::ContrailV2::VirtualNetwork
+    depends_on: [ template_NetworkIpam_1 ]
+    properties:
+      name: { get_param: management_network }
+      network_ipam_refs: [{ get_resource: template_NetworkIpam_1 }]
+      network_ipam_refs_data:
+        [{
+          network_ipam_refs_data_ipam_subnets:
+            [{
+              network_ipam_refs_data_ipam_subnets_subnet:
+                {
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_1 },
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_1 },
+                },
+            }]
+         }]
+
+  template_VirtualNetwork_2:
+    type: OS::ContrailV2::VirtualNetwork
+    depends_on: [ template_NetworkIpam_2 ]
+    properties:
+      name: { get_param: left_network }
+      network_ipam_refs: [{ get_resource: template_NetworkIpam_2 }]
+      network_ipam_refs_data:
+        [{
+          network_ipam_refs_data_ipam_subnets:
+            [{
+              network_ipam_refs_data_ipam_subnets_subnet:
+                {
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_2 },
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_2 },
+                },
+            }]
+         }]
+
+  template_VirtualNetwork_3:
+    type: OS::ContrailV2::VirtualNetwork
+    depends_on: [ template_NetworkIpam_3 ]
+    properties:
+      name: { get_param: right_network }
+      network_ipam_refs: [{ get_resource: template_NetworkIpam_3 }]
+      network_ipam_refs_data:
+        [{
+          network_ipam_refs_data_ipam_subnets:
+            [{
+              network_ipam_refs_data_ipam_subnets_subnet:
+                {
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_3 },
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_3 },
+                },
+            }]
+         }]
+
+  template_VirtualNetwork_4:
+    type: OS::ContrailV2::VirtualNetwork
+    depends_on: [ template_NetworkIpam_4 ]
+    properties:
+      name: { get_param: transparent_management_network }
+      network_ipam_refs: [{ get_resource: template_NetworkIpam_4 }]
+      network_ipam_refs_data:
+        [{
+          network_ipam_refs_data_ipam_subnets:
+            [{
+              network_ipam_refs_data_ipam_subnets_subnet:
+                {
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_4 },
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_4 },
+                },
+            }]
+        }]
+
+  template_VirtualNetwork_5:
+    type: OS::ContrailV2::VirtualNetwork
+    depends_on: [ template_NetworkIpam_5 ]
+    properties:
+      name: { get_param: transparent_left_network }
+      network_ipam_refs: [{ get_resource: template_NetworkIpam_5 }]
+      network_ipam_refs_data:
+        [{
+          network_ipam_refs_data_ipam_subnets:
+            [{
+              network_ipam_refs_data_ipam_subnets_subnet:
+                {
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_5 },
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_5 },
+                },
+            }]
+         }]
+
+  template_VirtualNetwork_6:
+    type: OS::ContrailV2::VirtualNetwork
+    depends_on: [ template_NetworkIpam_6 ]
+    properties:
+      name: { get_param: transparent_right_network }
+      network_ipam_refs: [{ get_resource: template_NetworkIpam_6 }]
+      network_ipam_refs_data:
+        [{
+          network_ipam_refs_data_ipam_subnets:
+            [{
+              network_ipam_refs_data_ipam_subnets_subnet:
+                {
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_6 },
+                  network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len: { get_param: network_ipam_refs_data_ipam_subnets_subnet_ip_prefix_len_6 },
+                },
+            }]
+         }]
+
+  template_ServiceTemplate_1:
+    type: OS::ContrailV2::ServiceTemplate
+    properties:
+      name: { get_param: st1_name }
+      service_template_properties:
+        {
+          service_template_properties_version: { get_param: st1_properties_version },
+          service_template_properties_service_mode: { get_param: st1_properties_service_mode },
+          service_template_properties_service_type: { get_param: st1_properties_service_type },
+          service_template_properties_image_name: { get_param: st1_properties_image_name },
+          service_template_properties_service_scaling: { get_param: st1_properties_service_scaling },
+          service_template_properties_interface_type:
+            [
+              {
+              service_template_properties_interface_type_service_interface_type: { get_param: st1_properties_interface_type_service_interface_type_1 },
+              service_template_properties_interface_type_shared_ip: { get_param: st1_properties_interface_type_shared_ip_1 },
+              service_template_properties_interface_type_static_route_enable: { get_param: st1_properties_interface_type_static_route_enable_1 },
+              },
+              {
+              service_template_properties_interface_type_service_interface_type: { get_param: st1_properties_interface_type_service_interface_type_2 },
+              service_template_properties_interface_type_shared_ip: { get_param: st1_properties_interface_type_shared_ip_2 },
+              service_template_properties_interface_type_static_route_enable: { get_param: st1_properties_interface_type_static_route_enable_2 },
+              },
+              {
+              service_template_properties_interface_type_service_interface_type: { get_param: st1_properties_interface_type_service_interface_type_3 },
+              service_template_properties_interface_type_shared_ip: { get_param: st1_properties_interface_type_shared_ip_3 },
+              service_template_properties_interface_type_static_route_enable: { get_param: st1_properties_interface_type_static_route_enable_3 },
+              }
+            ],
+          service_template_properties_flavor: { get_param: st1_properties_flavor },
+          service_template_properties_ordered_interfaces: { get_param: st1_properties_ordered_interfaces },
+          service_template_properties_service_virtualization_type: { get_param: st1_properties_service_virtualization_type },
+          service_template_properties_availability_zone_enable: { get_param: st1_properties_availability_zone_enable },
+        }
+      domain: { get_param: domain }
+
+  template_ServiceTemplate_2:
+    type: OS::ContrailV2::ServiceTemplate
+    properties:
+      name: { get_param: st2_name }
+      service_template_properties:
+        {
+          service_template_properties_version: { get_param: st2_properties_version },
+          service_template_properties_service_mode: { get_param: st2_properties_service_mode },
+          service_template_properties_service_type: { get_param: st2_properties_service_type },
+          service_template_properties_image_name: { get_param: st2_properties_image_name },
+          service_template_properties_service_scaling: { get_param: st2_properties_service_scaling },
+          service_template_properties_interface_type:
+            [
+              {
+              service_template_properties_interface_type_service_interface_type: { get_param: st2_properties_interface_type_service_interface_type_1 },
+              service_template_properties_interface_type_shared_ip: { get_param: st2_properties_interface_type_shared_ip_1 },
+              service_template_properties_interface_type_static_route_enable: { get_param: st2_properties_interface_type_static_route_enable_1 },
+              },
+              {
+              service_template_properties_interface_type_service_interface_type: { get_param: st2_properties_interface_type_service_interface_type_2 },
+              service_template_properties_interface_type_shared_ip: { get_param: st2_properties_interface_type_shared_ip_2 },
+              service_template_properties_interface_type_static_route_enable: { get_param: st2_properties_interface_type_static_route_enable_2 },
+              },
+              {
+              service_template_properties_interface_type_service_interface_type: { get_param: st2_properties_interface_type_service_interface_type_3 },
+              service_template_properties_interface_type_shared_ip: { get_param: st2_properties_interface_type_shared_ip_3 },
+              service_template_properties_interface_type_static_route_enable: { get_param: st2_properties_interface_type_static_route_enable_3 },
+              }
+            ],
+          service_template_properties_flavor: { get_param: st2_properties_flavor },
+          service_template_properties_ordered_interfaces: { get_param: st2_properties_ordered_interfaces },
+          service_template_properties_service_virtualization_type: { get_param: st2_properties_service_virtualization_type },
+          service_template_properties_availability_zone_enable: { get_param: st2_properties_availability_zone_enable },
+        }
+      domain: { get_param: domain }
+
+  template_ServiceInstance_1:
+    type: OS::ContrailV2::ServiceInstance
+    depends_on: [ template_ServiceTemplate_1 ]
+    properties:
+      name: { get_param: si1_name }
+      service_instance_properties:
+        {
+          service_instance_properties_interface_list:
+            [
+              {
+                service_instance_properties_interface_list_virtual_network:
+                 {
+                   list_join: [':', { get_attr: [ template_VirtualNetwork_4, fq_name ] } ]
+                 },
+              },
+              {
+                service_instance_properties_interface_list_virtual_network:
+                  {
+                    list_join: [':', { get_attr: [ template_VirtualNetwork_5, fq_name ] } ]
+                  },
+#                service_instance_properties_interface_list_allowed_address_pairs:
+#                  {
+#                    service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair:
+#                      [{
+#                        service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip:
+#                          {
+#                            service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix: { get_param: si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_2 },
+#                            service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len: { get_param: si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_2 },
+#                          },
+#                        service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_mac: { get_param: si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_mac_2 },
+#                      }],
+#                  },
+              },
+              {
+              service_instance_properties_interface_list_virtual_network:
+                {
+                   list_join: [':', { get_attr: [ template_VirtualNetwork_6, fq_name ] } ]
+                },
+#              service_instance_properties_interface_list_allowed_address_pairs:
+#                {
+#                  service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair:
+#                    [{
+#                      service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip:
+#                        {
+#                          service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix: { get_param: si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_3 },
+#                          service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len: { get_param: si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_3 },
+#                        },
+#                      service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_address_mode: { get_param: si1_properties_interface_list_allowed_address_pairs_allowed_address_pair_address_mode_3 },
+#                    }],
+#                },
+              }
+            ],
+        }
+      service_template_refs: [{ get_resource: template_ServiceTemplate_1 }]
+
+  template_PortTuple_1:
+    depends_on: [ template_ServiceInstance_1]
+    type: OS::ContrailV2::PortTuple
+    properties:
+      name: { get_param: si1_port_tuple_name }
+      service_instance: { list_join: [':', { get_attr: [ template_ServiceInstance_1, fq_name ] } ] }
+
+  template_si1_VirtualMachineInterface_1:
+    type: OS::ContrailV2::VirtualMachineInterface
+    depends_on: [ template_PortTuple_1 ]
+    properties:
+      name: { get_param: transparent_management_network }
+      virtual_machine_interface_properties:
+        {
+          virtual_machine_interface_properties_service_interface_type: { get_param: service_interface_type_1 },
+        }
+      port_tuple_refs: [{ get_resource: template_PortTuple_1 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_4, fq_name ] } ] }]
+
+  template_si1_VirtualMachineInterface_2:
+    type: OS::ContrailV2::VirtualMachineInterface
+    depends_on: [ template_PortTuple_1 ]
+    properties:
+      name: { get_param: transparent_left_network }
+      virtual_machine_interface_properties:
+        {
+          virtual_machine_interface_properties_service_interface_type: { get_param: service_interface_type_2 },
+        }
+      port_tuple_refs: [{ get_resource: template_PortTuple_1 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_5, fq_name ] } ] }]
+
+  template_si1_VirtualMachineInterface_3:
+    type: OS::ContrailV2::VirtualMachineInterface
+    depends_on: [ template_PortTuple_1 ]
+    properties:
+      name: { get_param: transparent_right_network }
+      virtual_machine_interface_properties:
+        {
+          virtual_machine_interface_properties_service_interface_type: { get_param: service_interface_type_3 },
+        }
+      port_tuple_refs: [{ get_resource: template_PortTuple_1 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_6, fq_name ] } ] }]
+
+  template_si1_InstanceIp_1:
+    type: OS::ContrailV2::InstanceIp
+    depends_on: [ template_si1_VirtualMachineInterface_1 ]
+    properties:
+      name: { get_param: management_network }
+      virtual_machine_interface_refs: [{ get_resource: template_si1_VirtualMachineInterface_1 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_4, fq_name ] } ] }]
+
+  template_si1_InstanceIp_2:
+    type: OS::ContrailV2::InstanceIp
+    depends_on: [ template_si1_VirtualMachineInterface_2 ]
+    properties:
+      name: { get_param: left_network }
+      virtual_machine_interface_refs: [{ get_resource: template_si1_VirtualMachineInterface_2 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_5, fq_name ] } ] }]
+
+  template_si1_InstanceIp_3:
+    type: OS::ContrailV2::InstanceIp
+    depends_on: [ template_si1_VirtualMachineInterface_3 ]
+    properties:
+      name: { get_param: right_network }
+      virtual_machine_interface_refs: [{ get_resource: template_si1_VirtualMachineInterface_3 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_6, fq_name ] } ] }]
+
+  si1_instance:
+    type: OS::Nova::Server
+    depends_on: [ template_si1_InstanceIp_1, template_si1_InstanceIp_2, template_si1_InstanceIp_3 ]
+    properties:
+      name: { get_param: si1_name }
+      image: { get_param:  st1_properties_image_name }
+      flavor: { get_param: st1_properties_flavor }
+      networks:
+        - port: { get_resource: template_si1_VirtualMachineInterface_1 }
+        - port: { get_resource: template_si1_VirtualMachineInterface_2 }
+        - port: { get_resource: template_si1_VirtualMachineInterface_3 }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+            #!/bin/sh
+            echo -e "a\na" | passwd centos
+            cat << EOL > /etc/sysconfig/network-scripts/ifcfg-eth1
+            DEVICE=eth1
+            BOOTPROTO=dhcp
+            TYPE=Ethernet
+            ONBOOT=yes
+            EOL
+            ifconfig eth1 up
+
+            cat << EOL > /etc/sysconfig/network-scripts/ifcfg-eth2
+            DEVICE=eth2
+            BOOTPROTO=dhcp
+            TYPE=Ethernet
+            ONBOOT=yes
+            EOL
+            ifconfig eth2 up
+
+            echo "GATEWAY=mgmt_gateway1" >> /etc/sysconfig/network
+
+            service network restart
+            ip link add name br0 type bridge
+            ip link set dev br0 up
+            ip link set dev eth1 master br0
+            ip link set dev eth2 master br0
+            wc_notify --data-binary '{"status": "SUCCESS"}'
+          params:
+            wc_notify: { get_attr: [wait_handle1, curl_cli] }
+            mgmt_gateway1: { get_param: network_ipam_refs_data_ipam_subnets_default_gateway_4 }
+
+  template_ServiceInstance_2:
+    type: OS::ContrailV2::ServiceInstance
+    depends_on: [ template_ServiceTemplate_2 ]
+    properties:
+      name: { get_param: si2_name }
+      service_instance_properties:
+        {
+          service_instance_properties_interface_list:
+            [
+              {
+                service_instance_properties_interface_list_virtual_network:
+                 {
+                   list_join: [':', { get_attr: [ template_VirtualNetwork_4, fq_name ] } ]
+                 },
+              },
+              {
+                service_instance_properties_interface_list_virtual_network:
+                  {
+                    list_join: [':', { get_attr: [ template_VirtualNetwork_5, fq_name ] } ]
+                  },
+#                service_instance_properties_interface_list_allowed_address_pairs:
+#                  {
+#                    service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair:
+#                      [{
+#                        service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip:
+#                          {
+#                            service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix: { get_param: si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_2 },
+#                            service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len: { get_param: si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_2 },
+#                          },
+#                        service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_mac: { get_param: si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_mac_2 },
+#                      }],
+#                  },
+              },
+              {
+              service_instance_properties_interface_list_virtual_network:
+                {
+                   list_join: [':', { get_attr: [ template_VirtualNetwork_6, fq_name ] } ]
+                },
+#              service_instance_properties_interface_list_allowed_address_pairs:
+#                {
+#                  service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair:
+#                    [{
+#                      service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip:
+#                        {
+#                          service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix: { get_param: si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_3 },
+#                          service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len: { get_param: si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_ip_ip_prefix_len_3 },
+#                        },
+#                      service_instance_properties_interface_list_allowed_address_pairs_allowed_address_pair_address_mode: { get_param: si2_properties_interface_list_allowed_address_pairs_allowed_address_pair_address_mode_3 },
+#                    }],
+#                },
+              }
+            ],
+        }
+      service_template_refs: [{ get_resource: template_ServiceTemplate_2 }]
+
+  template_PortTuple_2:
+    type: OS::ContrailV2::PortTuple
+    depends_on: [ template_ServiceInstance_2]
+    properties:
+      name: { get_param: si2_port_tuple_name }
+      service_instance: { list_join: [':', { get_attr: [ template_ServiceInstance_2, fq_name ] } ] }
+
+  template_si2_VirtualMachineInterface_1:
+    type: OS::ContrailV2::VirtualMachineInterface
+    depends_on: [ template_PortTuple_2 ]
+    properties:
+      name: { get_param: transparent_management_network }
+      virtual_machine_interface_properties:
+        {
+          virtual_machine_interface_properties_service_interface_type: { get_param: service_interface_type_1 },
+        }
+      port_tuple_refs: [{ get_resource: template_PortTuple_2 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_4, fq_name ] } ] }]
+
+  template_si2_VirtualMachineInterface_2:
+    type: OS::ContrailV2::VirtualMachineInterface
+    depends_on: [ template_PortTuple_2 ]
+    properties:
+      name: { get_param: transparent_left_network }
+      virtual_machine_interface_properties:
+        {
+          virtual_machine_interface_properties_service_interface_type: { get_param: service_interface_type_2 },
+        }
+      port_tuple_refs: [{ get_resource: template_PortTuple_2 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_5, fq_name ] } ] }]
+
+  template_si2_VirtualMachineInterface_3:
+    type: OS::ContrailV2::VirtualMachineInterface
+    depends_on: [ template_PortTuple_2 ]
+    properties:
+      name: { get_param: transparent_right_network }
+      virtual_machine_interface_properties:
+        {
+          virtual_machine_interface_properties_service_interface_type: { get_param: service_interface_type_3 },
+        }
+      port_tuple_refs: [{ get_resource: template_PortTuple_2 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_6, fq_name ] } ] }]
+
+  template_si2_InstanceIp_1:
+    type: OS::ContrailV2::InstanceIp
+    depends_on: [ template_si2_VirtualMachineInterface_1 ]
+    properties:
+      name: { get_param: management_network }
+      virtual_machine_interface_refs: [{ get_resource: template_si2_VirtualMachineInterface_1 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_4, fq_name ] } ] }]
+
+  template_si2_InstanceIp_2:
+    type: OS::ContrailV2::InstanceIp
+    depends_on: [ template_si2_VirtualMachineInterface_2 ]
+    properties:
+      name: { get_param: transparent_left_network }
+      virtual_machine_interface_refs: [{ get_resource: template_si2_VirtualMachineInterface_2 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_5, fq_name ] } ] }]
+
+  template_si2_InstanceIp_3:
+    type: OS::ContrailV2::InstanceIp
+    depends_on: [ template_si2_VirtualMachineInterface_3 ]
+    properties:
+      name: { get_param: transparent_right_network }
+      virtual_machine_interface_refs: [{ get_resource: template_si2_VirtualMachineInterface_3 }]
+      virtual_network_refs: [{ list_join: [':', { get_attr: [ template_VirtualNetwork_6, fq_name ] } ] }]
+
+  si2_instance:
+    type: OS::Nova::Server
+    depends_on: [ template_si2_InstanceIp_1, template_si2_InstanceIp_2, template_si2_InstanceIp_3 ]
+    properties:
+      name: {get_param: si2_name }
+      image: { get_param:  st2_properties_image_name }
+      flavor: { get_param: st2_properties_flavor }
+      networks:
+        - port: { get_resource: template_si2_VirtualMachineInterface_1 }
+        - port: { get_resource: template_si2_VirtualMachineInterface_2 }
+        - port: { get_resource: template_si2_VirtualMachineInterface_3 }
+      user_data_format: RAW
+      user_data:
+        str_replace:
+          template: |
+            #!/bin/sh
+            echo -e "a\na" | passwd centos
+            cat << EOL > /etc/sysconfig/network-scripts/ifcfg-eth1
+            DEVICE=eth1
+            BOOTPROTO=dhcp
+            TYPE=Ethernet
+            ONBOOT=yes
+            EOL
+            ifconfig eth1 up
+
+            cat << EOL > /etc/sysconfig/network-scripts/ifcfg-eth2
+            DEVICE=eth2
+            BOOTPROTO=dhcp
+            TYPE=Ethernet
+            ONBOOT=yes
+            EOL
+            ifconfig eth2 up
+
+            echo "GATEWAY=mgmt_gateway4" >> /etc/sysconfig/network
+
+            service network restart
+            ip link add name br0 type bridge
+            ip link set dev br0 up
+            ip link set dev eth1 master br0
+            ip link set dev eth2 master br0
+            wc_notify --data-binary '{"status": "SUCCESS"}'
+          params:
+            wc_notify: { get_attr: [wait_handle2, curl_cli] }
+            mgmt_gateway4: { get_param: network_ipam_refs_data_ipam_subnets_default_gateway_4 }
+
+  template_Network_Policy:
+    type: OS::ContrailV2::NetworkPolicy
+    depends_on: [template_ServiceInstance_1, template_ServiceInstance_2]
+    properties:
+      name: { get_param: policy_name }
+      network_policy_entries:
+        {
+          network_policy_entries_policy_rule:
+            [
+              {
+                network_policy_entries_policy_rule_direction: { get_param: direction },
+                network_policy_entries_policy_rule_protocol: { get_param: protocol },
+                network_policy_entries_policy_rule_src_ports:
+                  [
+                    {
+                      network_policy_entries_policy_rule_src_ports_start_port: { get_param: src_port_start },
+                      network_policy_entries_policy_rule_src_ports_end_port: { get_param: src_port_end }
+                    }
+                  ],
+                network_policy_entries_policy_rule_dst_ports:
+                  [
+                    {
+                      network_policy_entries_policy_rule_dst_ports_start_port: { get_param: dst_port_start },
+                      network_policy_entries_policy_rule_dst_ports_end_port: { get_param: dst_port_end }
+                    }
+                  ],
+                network_policy_entries_policy_rule_dst_addresses:
+                  [
+                    {
+                      network_policy_entries_policy_rule_dst_addresses_virtual_network:
+                        {
+                          list_join: [':', { get_attr: [ template_VirtualNetwork_3, fq_name ] } ]
+                        }
+                    }
+                  ],
+                network_policy_entries_policy_rule_src_addresses:
+                  [
+                    {
+                      network_policy_entries_policy_rule_src_addresses_virtual_network:
+                        {
+                          list_join: [':', { get_attr: [ template_VirtualNetwork_2, fq_name ] } ]
+                        }
+                    }
+                  ],
+                network_policy_entries_policy_rule_action_list: {
+                  network_policy_entries_policy_rule_action_list_simple_action: { get_param: simple_action },
+                  network_policy_entries_policy_rule_action_list_apply_service:
+                    [
+                      {
+                        list_join: [':', { get_attr: [ template_ServiceInstance_1, fq_name ] } ]
+                      },
+                      {
+                        list_join: [':', { get_attr: [ template_ServiceInstance_2, fq_name ] } ]
+                      }
+                    ]
+                },
+              }
+            ]
+        }
+
+  wait_condition1:
+    type: OS::Heat::WaitCondition
+    depends_on: si1_instance
+    properties:
+      count: 1
+      handle: { get_resource: wait_handle1 }
+      timeout: 300
+
+  wait_handle1:
+    type: OS::Heat::WaitConditionHandle
+
+  wait_condition2:
+    type: OS::Heat::WaitCondition
+    depends_on: si2_instance
+    properties:
+      count: 1
+      handle: { get_resource: wait_handle2 }
+      timeout: 300
+
+  wait_handle2:
+    type: OS::Heat::WaitConditionHandle
+
+  attach_policy_left_VN:
+    type: OS::Contrail::AttachPolicy
+    depends_on: wait_condition1
+    properties:
+      network: { get_resource: template_VirtualNetwork_2}
+      policy: { get_resource: template_Network_Policy}
+
+  attach_policy_right_VN:
+    type: OS::Contrail::AttachPolicy
+    depends_on: wait_condition2
+    properties:
+      network: { get_resource: template_VirtualNetwork_3}
+      policy: { get_resource: template_Network_Policy}
+
+  client_instance:
+    type: OS::Nova::Server
+    depends_on: [ template_VirtualNetwork_2 ]
+    properties:
+      name: contrail-client
+      image: { get_param:  st1_properties_image_name }
+      flavor: { get_param: st1_properties_flavor }
+      networks:
+        - network: { get_resource: template_VirtualNetwork_2 }
+      user_data_format: RAW
+      user_data: |
+        #!/bin/sh
+        echo -e "a\na" | passwd centos
+
+  server_instance:
+    type: OS::Nova::Server
+    depends_on: [ template_VirtualNetwork_3 ]
+    properties:
+      name: contrail-server
+      image: { get_param:  st1_properties_image_name }
+      flavor: { get_param: st1_properties_flavor }
+      networks:
+        - network: { get_resource: template_VirtualNetwork_3 }
+      user_data_format: RAW
+      user_data: |
+        #!/bin/sh
+        echo -e "a\na" | passwd centos
